@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, Button, ToastAndroid, TouchableNativeFeedback, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Button, ToastAndroid, TouchableOpacity, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import React, { useEffect } from 'react'
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../firebase'
@@ -110,14 +110,14 @@ const LoginScreen = ({ navigation }) => {
                                                 </Text>
                                             </View>
                                             <View style={styles.btnContainer}>
-                                                <TouchableNativeFeedback
+                                                <TouchableOpacity
                                                     onPress={props.handleSubmit}>
                                                     <Text style={styles.btnLogin}>Log In</Text>
-                                                </TouchableNativeFeedback>
-                                                <TouchableNativeFeedback
+                                                </TouchableOpacity>
+                                                <TouchableOpacity
                                                     onPress={() => { hangleSignUpClicked() }}>
                                                     <Text style={[styles.btnLogin, styles.btnSignup]}>Sign Up</Text>
-                                                </TouchableNativeFeedback>
+                                                </TouchableOpacity>
                                             </View>
                                         </View>
                                     )}

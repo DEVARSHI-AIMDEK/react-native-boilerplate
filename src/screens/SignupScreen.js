@@ -1,13 +1,15 @@
-import { StyleSheet, Text, View, TextInput, ToastAndroid, ImageBackground, TouchableNativeFeedback, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { StyleSheet, Text, View, TextInput, ToastAndroid, ImageBackground, TouchableOpacity, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import React, { useState } from 'react'
-import { updateProfile, createUserWithEmailAndPassword } from "firebase/auth";
+import { updateProfile, createUserWithEmailAndPassword, connectAuthEmulator } from "firebase/auth";
 import { auth } from '../../firebase'
 import { Formik } from 'formik';
 import * as yup from 'yup'
 import Spinner from 'react-native-loading-spinner-overlay/lib';
+import { db } from '../../firebase';
+import { addDoc, collection } from 'firebase/firestore';
 
 const signupSchema = yup.object({
-    username: yup.string().min(3),
+    username: yup.string().min(3).required(),
     email: yup.string().required().test('is-valid-email', 'Enter valid email', (val) => {
         const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
         return reg.test(val)
@@ -19,6 +21,7 @@ const signupSchema = yup.object({
 const SignupScreen = ({ navigation }) => {
 
     const [loading, setLoading] = React.useState(false)
+    const usersRef = collection(db, 'users')
 
     function handleSignup(email, password, username) {
 
@@ -26,6 +29,13 @@ const SignupScreen = ({ navigation }) => {
 
         createUserWithEmailAndPassword(auth, email, password, username)
             .then(res => {
+                addDoc(usersRef, { email, username })
+                    .then(
+                        console.log('user added')
+                    )
+                    .catch(error => {
+                        console.log(error)
+                    })
                 updateProfile(auth.currentUser, {
                     displayName: username
                 })
@@ -49,7 +59,7 @@ const SignupScreen = ({ navigation }) => {
                 {loading ? (
                     <Spinner
                         visible={true}
-                        textContent={'Signing you in...'}
+                        textContent={'Signing you up...'}
                         textStyle={styles.spinnerTextStyle}
                     />
                 )
@@ -76,6 +86,7 @@ const SignupScreen = ({ navigation }) => {
                                     <View style={styles.inputContainer}>
                                         <View>
                                             <TextInput
+                                                autoCapitalize={'words'}
                                                 value={props.values.username}
                                                 onChangeText={props.handleChange('username')}
                                                 style={styles.input}
@@ -111,7 +122,7 @@ const SignupScreen = ({ navigation }) => {
                                                 value={props.values.confirmPass}
                                                 onChangeText={props.handleChange('confirmPass')}
                                                 style={styles.input}
-                                                secureTextEntry
+                                                keyboardType='visible-password'
                                                 onBlur={props.handleBlur('confirmPass')}
                                                 placeholder='Enter Password Again'
                                             />
@@ -120,10 +131,10 @@ const SignupScreen = ({ navigation }) => {
                                             {props.touched.confirmPass && props.errors.confirmPass}
                                         </Text>
                                         <View style={styles.btnContainer}>
-                                            <TouchableNativeFeedback
+                                            <TouchableOpacity
                                                 onPress={props.handleSubmit}>
                                                 <Text style={styles.btnLogin}>Sign Up</Text>
-                                            </TouchableNativeFeedback>
+                                            </TouchableOpacity>
                                         </View>
                                     </View>
                                 )}

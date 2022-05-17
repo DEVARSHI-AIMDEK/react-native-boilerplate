@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableNativeFeedback } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { auth } from '../../firebase';
 import { setData } from '../../shared/actions/counterActions';
@@ -15,7 +15,7 @@ function EmployeeDetailScreen({ navigation }) {
         setLoading(true)
 
         fetch(
-            'https://hub.dummyapis.com/employee?noofRecords=100&idStarts=1001'
+            'https://hub.dummyapis.com/employee?noofRecords=10&idStarts=1001'
         )
             .then(res => res.json())
             .then(res => {
@@ -46,14 +46,14 @@ function EmployeeDetailScreen({ navigation }) {
                 ) : (
                     <>
                         <Text style={styles.text}>Hey, {user.displayName}</Text><View style={styles.btnContainer}>
-                            <TouchableNativeFeedback
+                            <TouchableOpacity
                                 onPress={() => getEmpData()}>
                                 <Text style={[styles.btnSignout, styles.btnGetInfo]}>Get Employee Info</Text>
-                            </TouchableNativeFeedback>
-                            <TouchableNativeFeedback
+                            </TouchableOpacity>
+                            <TouchableOpacity
                                 onPress={() => handleSignout()}>
                                 <Text style={styles.btnSignout}>Sign Out</Text>
-                            </TouchableNativeFeedback>
+                            </TouchableOpacity>
                         </View>
                     </>
                 )

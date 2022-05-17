@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, ActivityIndicator, Button } from 'react-native'
+import { StyleSheet, Text, View, FlatList } from 'react-native'
 import React from 'react'
 import { useSelector } from 'react-redux'
 
