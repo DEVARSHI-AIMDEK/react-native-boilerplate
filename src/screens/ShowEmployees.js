@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-const ShowEmployees = () => {
+const ShowEmployees = ({ navigation }) => {
 
     const [data, setData] = React.useState()
 
@@ -11,6 +11,10 @@ const ShowEmployees = () => {
         setData(temp)
     }, [])
 
+    const showEmpDetail = item => {
+        navigation.navigate('EmpDetails', { item: item })
+    }
+
     return (
         <View style={styles.container}>
             {data &&
@@ -18,9 +22,11 @@ const ShowEmployees = () => {
                     data={data}
                     renderItem={({ item }) => (
                         <View>
-                            <Text style={styles.text}>
-                                {`${item.firstName} ${item.lastName}`}
-                            </Text>
+                            <TouchableOpacity onPress={() => showEmpDetail(item)}>
+                                <Text style={styles.text}>
+                                    {`${item.firstName} ${item.lastName}`}
+                                </Text>
+                            </TouchableOpacity>
                         </View>
                     )
                     }

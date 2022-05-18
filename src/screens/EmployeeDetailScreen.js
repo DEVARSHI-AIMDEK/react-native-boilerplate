@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { auth } from '../../firebase';
 import { setData } from '../../shared/actions/counterActions';
@@ -45,7 +45,8 @@ function EmployeeDetailScreen({ navigation }) {
                     />
                 ) : (
                     <>
-                        <Text style={styles.text}>Hey, {user.displayName}</Text><View style={styles.btnContainer}>
+                        <Text style={styles.text}>Hey, {user.displayName}</Text>
+                        <View style={styles.btnContainer}>
                             <TouchableOpacity
                                 onPress={() => getEmpData()}>
                                 <Text style={[styles.btnSignout, styles.btnGetInfo]}>Get Employee Info</Text>
@@ -59,7 +60,7 @@ function EmployeeDetailScreen({ navigation }) {
                 )
             }
 
-        </View>
+        </View >
     )
 }
 
@@ -98,4 +99,20 @@ const styles = StyleSheet.create({
     spinnerTextStyle: {
         color: '#FFF'
     },
+    imgContainer: {
+        alignSelf: 'center',
+        // height: 5
+    },
+    img: {
+        width: 36,
+        height: 36
+    },
+    imageContainer: {
+        padding: 30
+    },
+    image: {
+        width: 400,
+        height: 300,
+        resizeMode: 'cover'
+    }
 })

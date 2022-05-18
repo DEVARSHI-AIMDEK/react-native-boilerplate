@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TextInput, ToastAndroid, ImageBackground, TouchableOpacity, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native'
-import React, { useState } from 'react'
+import React from 'react'
 import { updateProfile, createUserWithEmailAndPassword, connectAuthEmulator } from "firebase/auth";
 import { auth } from '../../firebase'
 import { Formik } from 'formik';
@@ -23,6 +23,11 @@ const SignupScreen = ({ navigation }) => {
     const [loading, setLoading] = React.useState(false)
     const usersRef = collection(db, 'users')
 
+    const numbers = ['apple', 'cake', '1.1', 'banana'];
+    numbers.reduce((total, num) => {
+        console.log('total', total, 'num', num)
+    }, '')
+
     function handleSignup(email, password, username) {
 
         setLoading(true)
@@ -41,7 +46,7 @@ const SignupScreen = ({ navigation }) => {
                 })
                 Keyboard.dismiss()
                 setLoading(false)
-                navigation.replace('Login')
+                navigation.replace('Employee')
             })
             .catch((error) => {
                 Alert.alert('Error!', error.message)
