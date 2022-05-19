@@ -21,7 +21,7 @@ function EmployeeDetailScreen({ navigation }) {
             .then(res => {
                 dispatch(setData(res))
                 setLoading(false)
-                navigation.navigate('ShowEmp')
+                navigation.navigate('Employee List')
             }).catch(error => {
                 setLoading(false)
                 console.log(error)

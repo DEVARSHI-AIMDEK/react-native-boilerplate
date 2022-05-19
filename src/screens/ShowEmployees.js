@@ -12,7 +12,7 @@ const ShowEmployees = ({ navigation }) => {
     }, [])
 
     const showEmpDetail = item => {
-        navigation.navigate('EmpDetails', { item: item })
+        navigation.navigate('Employee Detail', { item: item })
     }
 
     return (

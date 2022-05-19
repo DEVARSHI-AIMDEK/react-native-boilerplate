@@ -23,6 +23,9 @@ function App() {
           <Stack.Screen options={{ headerShown: false }} name='Login' component={LoginScreen} />
           <Stack.Screen options={{ headerShown: false }} name='Signup' component={SignupScreen} />
           <Stack.Screen name='BottomNav' options={{ headerShown: false }} component={BottomNav} />
+          <Stack.Screen name='Dashboard' option={{ headerShown: false }} component={EmployeeDetailScreen} />
+          <Stack.Screen name='Employee List' options={{ headerShown: true }} component={ShowEmployees} />
+          <Stack.Screen name='Employee Detail' option={{ headerShown: false }} component={EmployeeData} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
