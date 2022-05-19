@@ -92,6 +92,7 @@ const EmployeeData = ({ route }) => {
                 snapPoints={[200, 200, 0]}
                 initialSnap={2}
                 borderRadius={10}
+                enabledContentGestureInteraction={false}
                 renderContent={renderContent}
             />
         </>

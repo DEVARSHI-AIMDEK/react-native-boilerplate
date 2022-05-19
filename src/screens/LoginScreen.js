@@ -43,7 +43,7 @@ const LoginScreen = ({ navigation }) => {
                 const user = userCred.user
                 dispatch(setUser(user))
                 setLoading(false)
-                navigation.replace('Employee')
+                navigation.replace('BottomNav')
             })
             .catch((error) => {
                 Alert.alert('Error!', error.message)

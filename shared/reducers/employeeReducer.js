@@ -23,7 +23,10 @@ export const employeeReducer = (state = initState, { type, payload }) => {
 
         case GET_EMPLOYEE: {
             const employee = state.employee.filter(item => item.id === payload)
-            return employee
+            return {
+                ...state,
+                employee: employee
+            }
         }
 
         default:

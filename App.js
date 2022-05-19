@@ -10,6 +10,7 @@ import LoginScreen from './src/screens/LoginScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import EmployeeData from './src/screens/EmployeeData';
 import 'react-native-gesture-handler';
+import BottomNav from './src/navigations/BottomNav';
 
 const Stack = createStackNavigator()
 
@@ -21,9 +22,7 @@ function App() {
         <Stack.Navigator initialRouteName='Login' >
           <Stack.Screen options={{ headerShown: false }} name='Login' component={LoginScreen} />
           <Stack.Screen options={{ headerShown: false }} name='Signup' component={SignupScreen} />
-          <Stack.Screen name='Employee' component={EmployeeDetailScreen} />
-          <Stack.Screen name='ShowEmp' component={ShowEmployees} />
-          <Stack.Screen name="EmpDetails" component={EmployeeData} />
+          <Stack.Screen name='BottomNav' options={{ headerShown: false }} component={BottomNav} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
