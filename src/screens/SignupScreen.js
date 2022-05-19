@@ -7,6 +7,8 @@ import * as yup from 'yup'
 import Spinner from 'react-native-loading-spinner-overlay/lib';
 import { db } from '../../firebase';
 import { addDoc, collection } from 'firebase/firestore';
+import { setUser } from '../../shared/actions/userActions';
+import { useDispatch } from 'react-redux';
 
 const signupSchema = yup.object({
     username: yup.string().min(3).required(),
@@ -20,13 +22,9 @@ const signupSchema = yup.object({
 
 const SignupScreen = ({ navigation }) => {
 
+    const dispatch = useDispatch()
     const [loading, setLoading] = React.useState(false)
     const usersRef = collection(db, 'users')
-
-    const numbers = ['apple', 'cake', '1.1', 'banana'];
-    numbers.reduce((total, num) => {
-        console.log('total', total, 'num', num)
-    }, '')
 
     function handleSignup(email, password, username) {
 
@@ -34,6 +32,7 @@ const SignupScreen = ({ navigation }) => {
 
         createUserWithEmailAndPassword(auth, email, password, username)
             .then(res => {
+                dispatch(setUser(res.user))
                 addDoc(usersRef, { email, username })
                     .then(
                         console.log('user added')
@@ -46,7 +45,7 @@ const SignupScreen = ({ navigation }) => {
                 })
                 Keyboard.dismiss()
                 setLoading(false)
-                navigation.replace('Employee')
+                navigation.replace('BottomNav')
             })
             .catch((error) => {
                 Alert.alert('Error!', error.message)

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { auth } from '../../firebase';
 import { setData } from '../../shared/actions/counterActions';
 import Spinner from 'react-native-loading-spinner-overlay'
+import { clearUser } from '../../shared/actions/userActions';
 
 function EmployeeDetailScreen({ navigation }) {
 
@@ -32,6 +33,7 @@ function EmployeeDetailScreen({ navigation }) {
         setLoading(true)
         auth.signOut()
         setLoading(false)
+        dispatch(clearUser())
         navigation.replace('Login')
     }
 
